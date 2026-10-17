@@ -1,0 +1,19 @@
+services:
+  asterisk:
+    build: ./asterisk
+    container_name: minitel-asterisk
+    network_mode: host          # SIP/RTP with the HT802 on the LAN, no NAT
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./asterisk/etc:/etc/asterisk
+    depends_on: [modem]
+
+  modem:
+    build: ./modem
+    container_name: minitel-modem
+    network_mode: host          # listens on 127.0.0.1:4040 (AudioSocket)
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data:/data

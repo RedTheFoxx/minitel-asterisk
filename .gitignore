@@ -1,0 +1,5 @@
+data/
+asterisk/etc/generated/
+.env
+__pycache__/
+*.pyc
